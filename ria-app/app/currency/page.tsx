@@ -40,23 +40,11 @@ export default function CurrencyPage() {
     const convertCurrency = async() => {
         const numAmount = parseFloat(amount);
         if (!amount || numAmount <= 0) return;
-        setLoading(true);
-        try {
-            const res =  await fetch(`https://api.frankfurter.app/latest?from=${fromCurrency}&to=${toCurrency}`);
-            const data = await res.json();
-            const rate = data.rates?.[toCurrency];
-            if (rate){
-                const convertedAmount = (numAmount * rate).toFixed(2);
-                setResult({
-                    amount: convertedAmount,
-                    rate: rate.toFixed(4)
-                });
-            }
-        } catch (error) {
-            console.error("Error converting currency:", error);
-        } finally {
-            setLoading(false);
-        }
+        const rate = exchangeRate[toCurrency];
+        setResult({
+            amount: (numAmount * rate).toFixed(2),
+            rate: rate.toFixed(4)
+        });
     };
 
     // Swap from and to currencies
@@ -70,7 +58,7 @@ export default function CurrencyPage() {
     const popularCurrencies = ["USD", "EUR", "GBP", "JPY", "AUD", "CAD", "CHF", "CNY", "INR", "BRL"];
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-pink-50 p-4">
+        <div className="min-h-screen bg-linear-to-br from-blue-50 via-indigo-50 to-pink-50 p-4">
             <div className="max-w-md mx-auto bg-white rounded-xl shadow-md p-6">
                 <div className="text-center mb-4">
                     <h1 className="text-2xl font-bold text-gray-800">Currency Converter</h1>
@@ -146,6 +134,7 @@ export default function CurrencyPage() {
                             </div>
                         )}
                     </div>
+                
 
                 <div className="bg-white rounded-2xl shadow-2xl p-8">
                     <div className="flex items-center justify-between mb-4">
@@ -189,32 +178,7 @@ export default function CurrencyPage() {
                             </div>
                         ))}
                     </div>
-                    {Object.keys(exchangeRate).length > popularCurrencies.length && (
-                        <div className="mt-6">
-                            <details className="cursor-pointer">
-                                <summary className="text-lg font-bold text-gray-800 mb-2 hover:text-blue-600">
-                                    View {Object.keys(exchangeRate).length} exchange rates</summary>
-                                    <div className="mt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                                        {Object.entries(exchangeRate)
-                                            .filter(([currency]) => !popularCurrencies.includes(currency))
-                                            .sort(([a], [b]) => a.localeCompare(b))
-                                            .map(([currency, rate]) => (
-                                                <div
-                                                    key={currency}
-                                                    className="bg-white p-4 rounded-lg shadow-md text-center"
-                                                >
-                                                    <div className="flex justify-between items-center">
-                                                        <span className="font-medium text-sm">{currency}</span>
-                                                        <span className="font-bold text-indigo-600">
-                                                            {rate.toFixed(4)}
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
-                            </details>
-                        </div>
-                    )}
+                    
                 </div>
             </div>
     );
