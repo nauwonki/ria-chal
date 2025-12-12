@@ -34,6 +34,7 @@ export default function CurrencyPage() {
         }
     }, [fromCurrency]);
 
+    // Convert currency based on user input
     const convertCurrency = async() => {
         if (!amount || amount <= 0) return;
         setLoading(true);
@@ -53,6 +54,7 @@ export default function CurrencyPage() {
         }
     };
 
+    // Swap from and to currencies
     const swapCurrencies = () => {
         const temp = fromCurrency;
         setFromCurrency(toCurrency);
@@ -63,16 +65,7 @@ export default function CurrencyPage() {
     const popularCurrencies = ["USD", "EUR", "GBP", "JPY", "AUD", "CAD", "CHF", "CNY", "INR", "BRL"];
 
     return (
-        <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-        <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-            <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            Currency Exchange Dashboard
-            </h1>
-            <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Welcome to the Currency Exchange Dashboard. Here you can find real-time exchange rates and currency conversion tools.
-            </p>
-        </main>
-        </div>
+        <div className=""></div>
     );
 
 }
