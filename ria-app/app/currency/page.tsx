@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import FeesPage from "../fees/page";
 
 export default function CurrencyPage() {
     const[amount, setAmount] = useState('100');
@@ -61,9 +62,11 @@ export default function CurrencyPage() {
         <div className="min-h-screen bg-linear-to-br from-blue-50 via-indigo-50 to-pink-50 p-4">
             <div className="max-w-md mx-auto bg-white rounded-xl shadow-md p-6">
                 <div className="text-center mb-4">
+                    {/*Currency Converter Title*/}
                     <h1 className="text-2xl font-bold text-gray-800">Currency Converter</h1>
                 </div>
                     <div className="space-y-6">
+                        {/* From Amount and Currency */}
                         <div>
                             <label className="block text-gray-700 mb-2">Amount</label>
                             <div className="flex gap-4">
@@ -90,6 +93,7 @@ export default function CurrencyPage() {
                                 </select>
                             </div>
                         </div>
+                        {/* Swap Button */}
                         <div className="flex justify-center">
                             <button
                                 onClick={swapCurrencies}
@@ -99,6 +103,7 @@ export default function CurrencyPage() {
                                 change
                             </button>
                         </div>
+                        {/* To Currency Selection */}
                         <div>
                             <label className="block text-gray-700 mb-2">To</label>
                             <select 
@@ -117,6 +122,7 @@ export default function CurrencyPage() {
                                 
                             </select> 
                         </div>
+                        {/* Convert Button */}
                         <button
                             onClick={convertCurrency}
                             className="w-full bg-indigo-500 text-white p-2 rounded-md hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-400"
@@ -133,9 +139,12 @@ export default function CurrencyPage() {
                                 </div>  
                             </div>
                         )}
+                        {exchangeRate[toCurrency] && (
+                            <FeesPage realRate={exchangeRate[toCurrency]} />
+                        )}
                     </div>
                 
-
+                {/* Live Exchange Rates Section */}
                 <div className="bg-white rounded-2xl shadow-2xl p-8">
                     <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center space-x-4">
@@ -148,7 +157,7 @@ export default function CurrencyPage() {
                         >
                         Refresh
                         </button>
-                </div>
+                
                 <div className="text-sm text-center text-gray-500 mt-4">
                     Base Currency: {fromCurrency}
                 </div>
@@ -178,8 +187,9 @@ export default function CurrencyPage() {
                             </div>
                         ))}
                     </div>
-                    
                 </div>
+                    
             </div>
+        </div>
     );
 }
