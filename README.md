@@ -37,7 +37,7 @@ AI was used mainly for css stylings and div structures. It was also used for fix
 
 ## Assumptions and trade-offs
 
-Some assumptions made were that the exchange rates are accurate and up to date and the flat, percentage and fxmarkup fees; 
+Some assumptions made were that the exchange rates are accurate and up to date; and the flat, percentage and fxmarkup fees are estimated and not real. 
 
 Some trade-offs were: no authentication and not being able to actually transfer money.
 
